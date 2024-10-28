@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video QA Chatbot</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <script src="app.js" defer></script>
+</head>
+<body class="bg-gray-100 flex justify-center items-center min-h-screen">
+    <div class="bg-white shadow-lg rounded-lg max-w-md w-full p-6">
+        <h1 class="text-2xl font-bold mb-4 text-center">Video QA Chatbot</h1>
+        
+        <!-- Video Upload -->
+        <input type="file" id="videoInput" accept="video/*" class="mb-4 p-2 w-full border border-gray-300 rounded">
+        
+        <!-- Chatbot Display -->
+        <div id="chatDisplay" class="border border-gray-300 rounded h-64 p-3 mb-4 overflow-y-auto">
+            <!-- Chat messages will be displayed here -->
+        </div>
+
+        <!-- Chatbot Input -->
+        <div class="flex">
+            <input type="text" id="userInput" placeholder="Ask a question..." class="p-2 border border-gray-300 rounded-l w-full">
+            <button id="sendButton" class="bg-blue-500 text-white p-2 rounded-r">Send</button>
+        </div>
+    </div>
+</body>
+</html>
