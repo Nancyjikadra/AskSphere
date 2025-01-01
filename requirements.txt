@@ -1,6 +1,0 @@
-flask
-transformers
-torch
-sentence-transformers
-whisper
-gunicorn
