@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html data-theme="dark">
+<head>
+<title>Asksphere - Login</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+/* [Previous styles remain the same until .login-container] */
+
+:root[data-theme="dark"] {
+    --bg-primary: linear-gradient(to bottom right, #0c0c1d, #1a1a2e);
+    --bg-secondary: rgba(26, 26, 46, 0.8);
+    --text-primary: #fff;
+    --text-secondary: rgba(255, 255, 255, 0.6);
+    --accent: #10b981;
+    --nav-bg: rgba(26, 26, 46, 0.8);
+}
+
+:root[data-theme="light"] {
+    --bg-primary: linear-gradient(to bottom right, #f0f0f5, #ffffff);
+    --bg-secondary: rgba(255, 255, 255, 0.8);
+    --text-primary: #1a1a2e;
+    --text-secondary: rgba(26, 26, 46, 0.6);
+    --accent: #10b981;
+    --nav-bg: rgba(255, 255, 255, 0.8);
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    min-height: 100vh;
+    transition: all 0.3s ease;
+}
+
+/* Theme Toggle Styles */
+.theme-toggle {
+    position: fixed;
+    top: 15px;
+    right: 20px;
+    z-index: 1001;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.theme-toggle-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 50%;
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.theme-toggle-button:hover {
+    background: rgba(16, 185, 129, 0.1);
+}
+
+.w3-bar {
+    width: 100%;
+    overflow: hidden;
+    background: var(--nav-bg);
+    backdrop-filter: blur(10px);
+    position: fixed;
+    top: 0;
+    z-index: 1000;
+}
+
+.w3-bar-item {
+    padding: 14px 16px;
+    float: left;
+    color: var(--text-primary);
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.w3-bar-item:hover {
+    background-color: rgba(16, 185, 129, 0.1);
+    color: var(--accent);
+}
+
+.welcome-section {
+    text-align: center;
+    padding: 180px 20px 100px;
+    position: relative;
+    overflow: hidden;
+}
+
+.welcome-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at center, rgba(16, 185, 129, 0.1) 0%, transparent 70%);
+    z-index: -1;
+}
+
+.welcome-section h1 {
+    margin-bottom: 30px;
+    font-size: 3.5em;
+    background: linear-gradient(45deg, var(--text-primary), var(--accent));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: glow 3s ease-in-out infinite alternate;
+}
+
+@keyframes glow {
+    from {
+        text-shadow: 0 0 20px rgba(16, 185, 129, 0.5);
+    }
+    to {
+        text-shadow: 0 0 30px rgba(16, 185, 129, 0.8);
+    }
+}
+
+.lets-go-btn {
+    background: linear-gradient(45deg, #10b981, #3b82f6);
+    color: white;
+    padding: 16px 32px;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    border-radius: 30px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+    display: inline-block;
+}
+
+.lets-go-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);
+}
+
+.about-section {
+    padding: 80px 20px;
+    text-align: center;
+    background: var(--bg-secondary);
+    backdrop-filter: blur(10px);
+    margin: 40px 0;
+}
+
+.footer {
+    background: var(--bg-secondary);
+    backdrop-filter: blur(10px);
+    padding: 40px 20px;
+    text-align: center;
+    margin-top: auto;
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 40px;
+    padding: 0 20px;
+}
+
+.footer-section {
+    text-align: left;
+}
+
+.footer-section h3 {
+    color: var(--accent);
+    margin-bottom: 20px;
+}
+
+.footer-section ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-section ul li {
+    margin-bottom: 10px;
+}
+
+.footer-section ul li a {
+    color: var(--text-primary);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footer-section ul li a:hover {
+    color: var(--accent);
+}
+
+.copyright {
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--text-secondary);
+}
+
+
+.login-container {
+    max-width: 400px;
+    margin: 120px auto 40px;
+    padding: 30px;
+    background: var(--bg-secondary);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.login-title {
+    text-align: center;
+    margin-bottom: 30px;
+    color: var(--text-primary);
+}
+
+.login-tabs {
+    display: flex;
+    margin-bottom: 20px;
+    border-bottom: 2px solid rgba(16, 185, 129, 0.2);
+}
+
+.tab {
+    flex: 1;
+    padding: 10px;
+    text-align: center;
+    cursor: pointer;
+    color: var(--text-secondary);
+    transition: all 0.3s ease;
+}
+
+.tab.active {
+    color: var(--accent);
+    border-bottom: 2px solid var(--accent);
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: var(--text-primary);
+}
+
+.form-group input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid rgba(16, 185, 129, 0.2);
+    border-radius: 8px;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    transition: all 0.3s ease;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.2);
+}
+
+.auth-button {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.login-btn {
+    background: linear-gradient(45deg, #10b981, #3b82f6);
+    color: white;
+}
+
+.google-btn {
+    background: white;
+    color: #333;
+}
+
+.web3-btn {
+    background: #7b3fe4;
+    color: white;
+}
+
+.auth-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+}
+
+.divider {
+    text-align: center;
+    margin: 20px 0;
+    color: var(--text-secondary);
+    position: relative;
+}
+
+.divider::before,
+.divider::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    width: 45%;
+    height: 1px;
+    background: var(--text-secondary);
+}
+
+.divider::before {
+    left: 0;
+}
+
+.divider::after {
+    right: 0;
+}
+
+</style>
+</head>
+<body>
+
+<!-- Theme Toggle and Navigation Bar remain the same -->
+<div class="theme-toggle">
+    <button class="theme-toggle-button" onclick="toggleTheme()">
+        <i class="fa fa-moon-o"></i>
+    </button>
+</div>
+
+<div class="w3-bar">
+    <a href="file.html" class="w3-bar-item">HOME</a>
+    <a href="#about" class="w3-bar-item">ABOUT</a>
+    <a href="login.html" class="w3-bar-item"><i class="fa fa-user"></i> Login</a>
+    <a href="#New" class="w3-bar-item"><i class="fa fa-th"></i> New</a>
+    <a href="#contact" class="w3-bar-item"><i class="fa fa-envelope"></i> CONTACT</a>
+</div>
+
+<div class="login-container"> 
+    <h2 class="login-title">Welcome Back</h2>
+    
+    <div class="login-tabs">
+        <div class="tab active" onclick="switchTab('login')">Login</div>
+        <div class="tab" onclick="switchTab('signup')">Sign Up</div>
+    </div>
+    
+    <form id="loginForm" onsubmit="return handleSubmit(event)">
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" required placeholder="Enter your email">
+        </div>
+        
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" required placeholder="Enter your password">
+        </div>
+        
+        <button type="submit" class="auth-button login-btn">
+            <i class="fa fa-lock"></i>
+            Login
+        </button>
+        
+        <div class="divider">or continue with</div>
+        
+        <button type="button" class="auth-button google-btn" onclick="loginWithGoogle()">
+            <i class="fa fa-google"></i>
+            Google
+        </button>
+        
+        <button type="button" class="auth-button web3-btn" onclick="loginWithWeb3()">
+            <i class="fa fa-chain"></i>
+            Web3 DID Login
+        </button>
+    </form>
+    <!--new-->
+    <form id="signupForm" onsubmit="return handleSignup(event)" style="display: none;">
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" id="name" required placeholder="Enter your name">
+        </div>
+        
+        <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" id="username" required placeholder="Enter your username">
+        </div>
+        
+        <div class="form-group">
+            <label for="profilePic">Profile Picture URL</label>
+            <input type="text" id="profilePic" placeholder="Enter profile picture URL">
+        </div>
+        
+        <div class="form-group">
+            <label for="signupEmail">Email</label>
+            <input type="email" id="signupEmail" required placeholder="Enter your email">
+        </div>
+        
+        <div class="form-group">
+            <label for="signupPassword">Password</label>
+            <input type="password" id="signupPassword" required placeholder="Enter your password">
+        </div>
+        
+        <button type="submit" class="auth-button signup-btn">
+            <i class="fa fa-user-plus"></i>
+            Sign Up
+        </button>
+    </form>
+<!--new end-->
+</div>
+
+<!-- Footer remains the same -->
+<footer class="footer">
+    <div class="footer-content">
+        <div class="footer-section">
+            <h3>Company</h3>
+            <ul>
+                <li><a href="#about">About</a></li>
+                <li><a href="#blog">Blog</a></li>
+                <li><a href="#careers">Careers</a></li>
+                <li><a href="#charter">Charter</a></li>
+            </ul>
+        </div>
+        
+        <div class="footer-section">
+            <h3>Solutions</h3>
+            <ul>
+                <li><a href="#overview">Overview</a></li>
+                <li><a href="#pricing">Pricing</a></li>
+                <li><a href="#examples">Examples</a></li>
+                <li><a href="#docs">Documentation</a></li>
+            </ul>
+        </div>
+        
+        <div class="footer-section">
+            <h3>Resources</h3>
+            <ul>
+                <li><a href="#developers">Developers</a></li>
+                <li><a href="#support">Support</a></li>
+                <li><a href="#safety">Safety</a></li>
+                <li><a href="#terms">Terms & Policies</a></li>
+            </ul>
+        </div>
+    </div>
+    
+    <div class="copyright">
+        © 2024 Asksphere. All rights reserved.
+    </div>
+</footer>
+<!-- Firebase App (the core Firebase SDK) -->
+<script src="https://www.gstatic.com/firebasejs/9.17.2/firebase-app.js"></script>
+<!-- Firebase Authentication -->
+<script src="https://www.gstatic.com/firebasejs/9.17.2/firebase-auth.js"></script>
+<script src="login.js" type="module"></script>
+
+<script>
+
+function toggleTheme() {
+    const html = document.documentElement;
+    const currentTheme = html.getAttribute('data-theme');
+    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+    html.setAttribute('data-theme', newTheme);
+    
+    // Update icon
+    const icon = document.querySelector('.theme-toggle-button i');
+    if (newTheme === 'dark') {
+        icon.className = 'fa fa-moon-o';
+    } else {
+        icon.className = 'fa fa-sun-o';
+    }
+}
+
+function switchTab(tab) {
+    const tabs = document.querySelectorAll('.tab');
+    const title = document.querySelector('.login-title');
+    const submitBtn = document.querySelector('.login-btn');
+    
+    tabs.forEach(t => t.classList.remove('active'));
+    const activeTab = document.querySelector(`.tab:${tab === 'login' ? 'first-child' : 'last-child'}`);
+    activeTab.classList.add('active');
+    
+    title.textContent = tab === 'login' ? 'Welcome Back' : 'Create Account';
+    submitBtn.textContent = tab === 'login' ? 'Login' : 'Sign Up';
+}
+
+</script>
+
+
+
+</body>
+</html>
