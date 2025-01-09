@@ -1,0 +1,10 @@
+numpy
+torch
+transformers
+openai-whisper
+sentence-transformers
+librosa
+opencv-python
+pillow
+flask
+scikit-learn
